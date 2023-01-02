@@ -14,7 +14,8 @@ const reducer = (state: any, action: any) => {
                 ...state,
                 isLoading: false,
                 fulfilled: true,
-                items: action.payload
+                items: action.payload.data,
+                totalResults: action.payload.totalResults
             }
         case 'FAILURE':
             return {
@@ -29,8 +30,7 @@ const reducer = (state: any, action: any) => {
                 isError: false,
                 fulfilled: false,
                 items: [],
-                search: action.payload.search,
-                page: action.payload.page,
+                search: action.payload,
                 __forceRefresh: true
             }
 
@@ -39,14 +39,13 @@ const reducer = (state: any, action: any) => {
     }
 }
 
-export const useGetMovies = (apiKey: any) => {
+export const useGetMovies = (apiKey: any, page: any) => {
     const [state, dispatch] = useReducer(reducer, {
         isLoading: false,
         isError: false,
         fulfilled: false,
         items: [],
         search: null,
-        page: 1,
         __forceRefresh: false
     });
 
@@ -61,15 +60,15 @@ export const useGetMovies = (apiKey: any) => {
                             params: {
                                 apiKey,
                                 s: state.search,
-                                page: state.page
+                                page: page
                             }
                         }
                     );
-                    dispatch({type: 'SUCCESS',  payload: result.data.Search});
+                    dispatch({type: 'SUCCESS',  payload: {data: result.data.Search, totalResults: result.data.totalResults}});
                 } catch (e) {
                     dispatch({type: 'FAILURE'});
                 }
             })()
-    }, [state.__forceRefresh]);
-    return [{...state}, (search: any, page: any) => dispatch({type: 'REFRESH', payload: {search, page}})]
+    }, [state.__forceRefresh, page]);
+    return [{...state}, (search: any, page: any) => dispatch({type: 'REFRESH', payload: search})]
 }
