@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import { useState, useEffect } from 'react';
+import { useMovieContext } from '../context/MovieContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+    const {total}: any = useMovieContext();
+
+    const navigate = useNavigate();
 
     const PrettyButton = styled.div`
     display: flex;
@@ -20,7 +26,7 @@ export const Navbar = () => {
         <PrettyButton>
             <div/>
             <div><h1>Title</h1></div>
-            <div>Car(0)</div>
+            <div onClick={() => navigate('/buy')}>{`Car(${total})`}</div>
         </PrettyButton>
     )
 }
