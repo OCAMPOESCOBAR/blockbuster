@@ -8,7 +8,7 @@ import {useNavigate } from "react-router-dom";
 
 export const MovieList = () => {
     const style = {
-        width: 300,
+        height: '400px'
     };
     const navigate = useNavigate()
     const [moviesListStatus, getMoviesList] = useGetMovies("5eec5adc");
@@ -40,7 +40,7 @@ export const MovieList = () => {
     }
 
     return (
-        <div>
+        <div style={{"height": "90%"}}>
             <div style={{ "marginTop": "20px", "textAlign": "center" }}>
                 <input placeholder="Search" type="search" onChange={handleSearch} />
                 <button onClick={searchClick}>Search</button>
@@ -51,7 +51,7 @@ export const MovieList = () => {
                 if (moviesListStatus.isLoading)
                     return <Spinner />
                 if (isShowBanner)
-                    return <Lottie animationData={banner} style={style} />
+                    return <div style={{ "width": "100%", "height": "100%", "textAlign": "center", "justifyContent": "center", "display": "flex", "alignItems": "center" }}><Lottie animationData={banner} style={style} /></div>
                 if (moviesListStatus.fulfilled && moviesListStatus.items.length > 0)
                     return (
                         <div style={{"margin": "20px", "backgroundColor": "white", "display": "flex", "flexWrap": "wrap", "justifyContent": "space-between"}}>
