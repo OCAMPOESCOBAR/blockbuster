@@ -5,7 +5,7 @@ export default createGlobalStyle`
       height: 100vh;
       margin: 0;
       padding: 0;
-      font-family: 'Open Sans', sans-serif;
+      font-family: system-ui;
       background-color: #F0F3F5;
   }
 `

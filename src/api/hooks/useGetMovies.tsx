@@ -21,7 +21,8 @@ const reducer = (state: any, action: any) => {
             return {
                 ...state,
                 isLoading: false,
-                isError: true
+                isError: true,
+                errorMsg: action.payload
             }
         case 'REFRESH':
             return {
@@ -46,6 +47,7 @@ export const useGetMovies = (apiKey: any, page: any) => {
         fulfilled: false,
         items: [],
         search: null,
+        errorMsg: null,
         __forceRefresh: false
     });
 
@@ -64,9 +66,15 @@ export const useGetMovies = (apiKey: any, page: any) => {
                             }
                         }
                     );
-                    dispatch({type: 'SUCCESS',  payload: {data: result.data.Search, totalResults: result.data.totalResults}});
-                } catch (e) {
-                    dispatch({type: 'FAILURE'});
+                    console.log(result.data)
+                    if(result.data.Response === 'True'){
+                        dispatch({type: 'SUCCESS',  payload: {data: result.data.Search, totalResults: result.data.totalResults}});
+                    }else{
+                        dispatch({type: 'FAILURE',  payload: result.data.Error });
+                    }
+                } catch (e: any) {
+                    console.log(e)
+                    dispatch({type: 'FAILURE', payload: e.response.data.Error});
                 }
             })()
     }, [state.__forceRefresh, page]);
