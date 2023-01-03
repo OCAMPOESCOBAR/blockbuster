@@ -40,7 +40,7 @@ const reducer = (state: any, action: any) => {
     }
 }
 
-export const useGetMovies = (apiKey: any, page: any) => {
+export const useGetMovies = (apiKey: string, page: number) => {
     const [state, dispatch] = useReducer(reducer, {
         isLoading: false,
         isError: false,
@@ -78,5 +78,5 @@ export const useGetMovies = (apiKey: any, page: any) => {
                 }
             })()
     }, [state.__forceRefresh, page]);
-    return [{...state}, (search: any, page: any) => dispatch({type: 'REFRESH', payload: search})]
+    return [{...state}, (search: string, page: number) => dispatch({type: 'REFRESH', payload: search})]
 }

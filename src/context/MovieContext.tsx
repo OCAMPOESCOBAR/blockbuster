@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
+import { IMovieAdd } from "../models/Movies.interface";
 
 const MovieContext = createContext(null);
 
@@ -9,11 +10,11 @@ export const useMovieContext = () => {
 };
 
 export const MovieProvider = ({ children }: any) => {
-    const list: any = localStorage.getItem('movies');
-    const items: any = localStorage.getItem('movies') !== null ? JSON.parse(list) : [];
-    const total =  items.reduce((acc: any, item: any) => {
-        return acc + parseInt(item?.count);
-    }, 0)
+    const list: string | null = localStorage.getItem('movies');
+    const items: IMovieAdd[] = list ? JSON.parse(list) : [];
+    const total =  items.reduce((acc: number, item: IMovieAdd) => {
+        return acc + item?.count;
+    }, 0);
     const [movies, setMovies] = useState(items);
     const [pageCount, setPageCount] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);

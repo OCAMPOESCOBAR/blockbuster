@@ -4,12 +4,12 @@ import error from "../assets/lotties/error.json"
 import { useGetMovies } from '../api/hooks/useGetMovies';
 import { useState, useEffect } from 'react';
 import { Spinner } from "../components/spinner";
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useMovieContext } from '../context/MovieContext';
 import Pagination from "rc-pagination";
 import styled from "styled-components";
 import { SearchBar } from "../components/searchbar";
+import { IMovie, IMovieAdd } from "../models/Movies.interface";
 
 
 export const MovieList = () => {
@@ -60,7 +60,7 @@ export const MovieList = () => {
         }
     }
 
-    const onChange = (page: any) => {
+    const onChange = (page: number) => {
         setPage(page);
         getMoviesList(search);
     };
@@ -85,7 +85,7 @@ export const MovieList = () => {
                         return (
                             <>
                                 <div style={{ "margin": "20px", "backgroundColor": "white", "display": "flex", "flexWrap": "wrap", "justifyContent": "space-between" }}>
-                                    {moviesList.map((item: any, idx: any) => {
+                                    {moviesList.map((item: IMovie, idx: number) => {
                                         return (
                                             <div key={idx} style={{ "padding": "20px" }}>
                                                 <Movie key={idx} item={item} />
@@ -133,7 +133,7 @@ const Movie = ({ item }: any) => {
     }
 
     const handleCount = (e: any) => {
-        setCount(e.target.value);
+        setCount(parseInt(e.target.value));
     }
 
     const handleAdd = () => {
@@ -147,7 +147,7 @@ const Movie = ({ item }: any) => {
             count,
             rentDate
         }
-        const finalItems: any = [...movies, obj];
+        const finalItems: IMovieAdd[] = [...movies, obj];
         localStorage.setItem('movies', JSON.stringify(finalItems));
         setMovies(finalItems);
     }
