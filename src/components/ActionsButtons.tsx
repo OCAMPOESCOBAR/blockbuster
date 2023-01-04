@@ -60,8 +60,6 @@ export const FinishButton = ({ disabled }: any) => {
 export const ClearButton = ({ disabled }: any) => {
     const { setMovies }: any = useMovieContext();
 
-    console.log('hola dis', disabled)
-
     const handleClick = () => {
         if(!disabled){
             localStorage.removeItem('movies');

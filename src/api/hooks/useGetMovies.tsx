@@ -66,14 +66,12 @@ export const useGetMovies = (apiKey: string, page: number) => {
                             }
                         }
                     );
-                    console.log(result.data)
                     if(result.data.Response === 'True'){
                         dispatch({type: 'SUCCESS',  payload: {data: result.data.Search, totalResults: result.data.totalResults}});
                     }else{
                         dispatch({type: 'FAILURE',  payload: result.data.Error });
                     }
                 } catch (e: any) {
-                    console.log(e)
                     dispatch({type: 'FAILURE', payload: e.response.data.Error || 'Something went wrong!'});
                 }
             })()

@@ -4,12 +4,41 @@ import error from "../assets/lotties/error.json"
 import { useGetMovies } from '../api/hooks/useGetMovies';
 import { useState, useEffect } from 'react';
 import { Spinner } from "../components/spinner";
-import moment from "moment";
-import { useMovieContext } from '../context/MovieContext';
 import Pagination from "rc-pagination";
 import styled from "styled-components";
 import { SearchBar } from "../components/searchbar";
-import { IMovie, IMovieAdd } from "../models/Movies.interface";
+import { IMovie } from "../models/Movies.interface";
+import { MovieCard } from "../components/MovieCard";
+import { MainContentComponent } from "../utils/styledComponents";
+
+const BodyContentComponent = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    text-align: center;
+    justify-content: center;
+`
+
+const LottieComponent = styled.div`
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        font-weight: 700;
+    }
+`
+
+const ListContent = styled.div`
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1400px;
+`
 
 
 export const MovieList = () => {
@@ -17,21 +46,18 @@ export const MovieList = () => {
         height: '400px'
     };
 
-    const itemsPerPage = 10;
     const [page, setPage] = useState(1);
     const [moviesListStatus, getMoviesList] = useGetMovies("5eec5adc", page);
     const [moviesList, setMoviesList] = useState([]);
     const [search, setSearch] = useState('');
     const [isShowBanner, setIsShowBanner] = useState(true);
-    const [isSearchClick, setIsSearchClick] = useState(false);
     const [totalResults, setTotalResults] = useState(0);
-
-    console.log('hola page', page)
 
     useEffect(() => {
         if (!search) {
             setIsShowBanner(true);
             setMoviesList([]);
+            setPage(1);
         }
     }, [search])
 
@@ -46,14 +72,6 @@ export const MovieList = () => {
         }
     }, [moviesListStatus.isLoading])
 
-    const handleSearch = (e: any) => {
-
-        setSearch(e.target.value);
-    }
-
-    console.log('hola se', search)
-
-
     const searchClick = () => {
         if (search) {
             getMoviesList(search);
@@ -67,42 +85,43 @@ export const MovieList = () => {
 
 
     return (
-        <div className="display-flex" style={{ "marginTop": "50px" }}>
+        <MainContentComponent>
             <SearchBar searchClick={searchClick} setSearch={setSearch} search={search} />
-            <div className="display-flex" style={{ "marginTop": "20px", "textAlign": "center" }}>
+            <BodyContentComponent>
                 {(() => {
                     if (moviesListStatus.isLoading)
                         return <Spinner />
                     if (isShowBanner)
                         return (
-                        <div className="display-flex" style={{ "textAlign": "center", "justifyContent": "center", "alignItems": "center" }}>
-                            <Lottie animationData={banner} style={style} />
-                            <h2 style={{"fontWeight": 700}}>find your movie... let's go!</h2>
-                        </div>)
+                            <LottieComponent>
+                                <Lottie animationData={banner} style={style} />
+                                <h2>find your movie... let's go!</h2>
+                            </LottieComponent>
+                        )
                     if (moviesList.length > 0)
                         return (
                             <>
-                                <div style={{ "margin": "20px", "backgroundColor": "white", "display": "flex", "flexWrap": "wrap", "justifyContent": "space-between" }}>
+                                <ListContent>
                                     {moviesList.map((item: IMovie, idx: number) => {
                                         return (
                                             <div key={idx} style={{ "padding": "20px" }}>
-                                                <Movie key={idx} item={item} />
+                                                <MovieCard key={idx} item={item} />
                                             </div>
                                         )
                                     })}
-                                </div>
+                                </ListContent>
                             </>
                         )
                     if (moviesListStatus.isError)
                         return (
-                            <div className="display-flex" style={{ "textAlign": "center", "justifyContent": "center", "alignItems": "center" }}> 
+                            <LottieComponent>
                                 <Lottie animationData={error} style={style} />
-                                <h2 style={{"fontWeight": 700}}>{moviesListStatus.errorMsg}</h2>
-                            </div>)
+                                <h2>{moviesListStatus.errorMsg}</h2>
+                            </LottieComponent>)
 
                 })()}
                 {moviesList.length > 0 &&
-                    <div>
+                    <div className="pagination">
                         <Pagination
                             className="pagination-data"
                             onChange={onChange}
@@ -110,75 +129,7 @@ export const MovieList = () => {
                             total={totalResults}
                         />
                     </div>}
-            </div>
-        </div>
+            </BodyContentComponent>
+        </MainContentComponent>
     );
-}
-
-const Movie = ({ item }: any) => {
-    const { movies, setMovies }: any = useMovieContext();
-
-    const currentDay = moment().format('YYYY-MM-DD');
-    const [option, setOption] = useState('');
-    const [rentDate, setRentDay] = useState(currentDay);
-    const [count, setCount] = useState(1);
-
-    const handleOption = (e: any) => {
-        setOption(e.target.value);
-    }
-
-    const handleDate = (e: any) => {
-        setRentDay(e.target.value);
-    }
-
-    const handleCount = (e: any) => {
-        setCount(parseInt(e.target.value));
-    }
-
-    const handleAdd = () => {
-        const obj = {
-            option,
-            title: item.Title,
-            type: item.Type,
-            year: item.Year,
-            poster: item.Poster,
-            id: item.imdbID,
-            count,
-            rentDate
-        }
-        const finalItems: IMovieAdd[] = [...movies, obj];
-        localStorage.setItem('movies', JSON.stringify(finalItems));
-        setMovies(finalItems);
-    }
-
-
-    return (
-        <div>
-            <div style={{ "display": "flex", "flexDirection": "column", "width": "210px", "border": "1px solid blue", "padding": "10px" }}>
-                <div style={{ "textAlign": "center" }}>
-                    <img src={item.Poster} width={200} />
-                </div>
-                <span title={item.Title} style={{ "textOverflow": "ellipsis", "overflow": "hidden", "whiteSpace": "nowrap" }}>{`Title: ${item.Title}`}</span>
-                <span>{`Type: ${item.Type}`}</span>
-                <span>{`Year: ${item.Year}`}</span>
-                <hr style={{ "width": "100%" }} />
-                <div style={{ "display": "flex" }}>
-                    <div>
-                        <input type="radio" id="huey" name="drone" value="buy" onChange={handleOption} />
-                        <label>Buy</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="dewey" name="drone" value="rent" onChange={handleOption} />
-                        <label>Rent</label>
-                    </div>
-                </div>
-
-                {option === 'rent' && <input type="date" value={rentDate} min={currentDay} onChange={handleDate}></input>}
-                <div style={{ "display": "flex" }}>
-                    <input type="number" min={1} value={count} onChange={handleCount} />
-                    <button onClick={handleAdd}>Add</button>
-                </div>
-            </div>
-        </div>
-    )
 }

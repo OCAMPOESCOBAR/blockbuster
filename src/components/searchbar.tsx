@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-    height: 50px;
     display: flex;
     justify-content: space-around;
 
@@ -49,7 +48,6 @@ export const SearchBar = ({searchClick, search, setSearch}: any) => {
 
   const onChange = (e: any) =>{ 
     e.preventDefault()
-      console.log('hola eve', e.target.value)
       setSearch(e.target.value);
   };
 

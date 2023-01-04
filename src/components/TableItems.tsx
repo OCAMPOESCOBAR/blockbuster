@@ -12,17 +12,23 @@ const Container = styled.div`
 
 const TableDetail = styled.div`
     overflow: scroll;
+
         table {
             border-collapse: collapse;
             min-width: 600px;
             max-width: 100%;
         }
-        th,
-        td {
+
+        th, td {
             padding: 1rem 2rem;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
+
+        tr {
+            background-color: white;
+        }
+
         th {
             font-weight: 700;
             font-size: 16px;
@@ -56,28 +62,6 @@ const BuyBox = styled.div`
     font-weight: 700;
     font-size: 16px;
 `
-
-// const ClearText = styled.button`
-//     background-color: #ff5073;
-//     color: white;
-//     text-align: center;
-//     border: none;
-//     padding: 10px;
-//     cursor: pointer;
-//     font-weight: 700;
-//     margin-bottom: 8px;
-//     font-size: 16px;
-// `
-
-// const FinishButton = styled.button`
-//     background-color: #2770A4;
-//     color: white;
-//     font-weight: 700;
-//     border: none;
-//     padding: 10px;
-//     cursor: pointer;
-//     font-size: 16px;
-// `
 
 const ProductColum = styled.div`
     display: flex;
@@ -118,7 +102,7 @@ const styleLottie = {
 }
 
 export const TableItems = ({ items }: any) => {
-    console.log('holaaaa', items)
+
     return (
         <div>
             <Container>
