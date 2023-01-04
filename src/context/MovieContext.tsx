@@ -17,7 +17,6 @@ export const MovieProvider = ({ children }: any) => {
     }, 0);
     const [movies, setMovies] = useState(items);
     const [pageCount, setPageCount] = useState(0);
-    const [itemOffset, setItemOffset] = useState(0);
 
     const value: any = useMemo(() => ({
        movies, setMovies, total, pageCount,setPageCount 

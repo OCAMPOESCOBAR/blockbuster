@@ -70,8 +70,6 @@ export const MovieList = () => {
         <div className="display-flex" style={{ "marginTop": "50px" }}>
             <SearchBar searchClick={searchClick} setSearch={setSearch} search={search} />
             <div className="display-flex" style={{ "marginTop": "20px", "textAlign": "center" }}>
-                {/* <input placeholder="Search" type="search" onChange={handleSearch} /> */}
-                {/* <button onClick={searchClick}>Search</button> */}
                 {(() => {
                     if (moviesListStatus.isLoading)
                         return <Spinner />
