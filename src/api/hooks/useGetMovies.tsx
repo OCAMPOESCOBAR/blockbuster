@@ -57,7 +57,7 @@ export const useGetMovies = (apiKey: string, page: number) => {
                 dispatch({type: 'INIT'});
                 try {
                     const result = await axios.get(
-                        'http://www.omdbapi.com/',
+                        'https://www.omdbapi.com/',
                         {
                             params: {
                                 apiKey,
