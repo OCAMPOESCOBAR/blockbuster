@@ -28,7 +28,7 @@ const PrettyButton = styled.div`
 
 export const Navbar = () => {
     const location = useLocation();
-    const {total}: any = useMovieContext();
+    const { total }: any = useMovieContext();
 
     const style = {
         width: '200px'
@@ -39,14 +39,14 @@ export const Navbar = () => {
     return (
         <PrettyButton>
             <div>
-            {location.pathname === '/buy' && <FontAwesomeIcon className="cursor-pointer" icon={faArrowLeft} onClick={() => navigate('/list')}/>}
+                {location.pathname === '/buy' && <FontAwesomeIcon className="cursor-pointer" icon={faArrowLeft} onClick={() => navigate('/list')} />}
             </div>
             <div className="cursor-pointer" onClick={() => navigate('/list')}>
-                <Lottie animationData={title} style={style}/>
+                <Lottie animationData={title} style={style} />
             </div>
             <div className="cursor-pointer" onClick={() => navigate('/buy')}>
-            <FontAwesomeIcon icon={faCartShopping} />                
-            {`(${total})`}
+                <FontAwesomeIcon icon={faCartShopping} />
+                {`(${total})`}
             </div>
         </PrettyButton>
     )

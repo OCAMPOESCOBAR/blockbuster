@@ -40,13 +40,14 @@ const ClearButtonComponent = styled.div`
     
 `
 
-export const FinishButton = ({ disabled }: any) => {
+export const FinishButton = ({ disabled, setSuccess }: any) => {
     const { setMovies }: any = useMovieContext();
 
     const handleClick = () => {
         if(!disabled){
             localStorage.removeItem('movies');
             setMovies([]);
+            setSuccess(true);
         }  
     }
 

@@ -2,6 +2,8 @@ import Lottie from "lottie-react";
 import styled from "styled-components";
 import nodata from "../assets/lotties/nodata.json"
 import { ClearButton, FinishButton } from './ActionsButtons';
+import { Notifications } from "./Notifications";
+import { useState } from 'react';
 
 const Container = styled.div`
     max-height: 500px;
@@ -103,8 +105,11 @@ const styleLottie = {
 
 export const TableItems = ({ items }: any) => {
 
+    const [success, setSuccess] = useState(false);
+
     return (
         <div>
+           {success && <Notifications setSuccess={setSuccess}/>}
             <Container>
                 <TableDetail>
                     <table>
@@ -165,7 +170,7 @@ export const TableItems = ({ items }: any) => {
                     <ClearButton disabled={items.length === 0}>
                         <span>Clear car</span>
                     </ClearButton>
-                    <FinishButton disabled={items.length === 0}>Finish</FinishButton>
+                    <FinishButton setSuccess={setSuccess} disabled={items.length === 0}>Finish</FinishButton>
                 </BuyBox>
             </Container>
         </div>

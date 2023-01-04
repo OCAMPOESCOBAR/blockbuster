@@ -83,15 +83,15 @@ export const MovieCard = ({ item }: any) => {
     const [rentDate, setRentDay] = useState(currentDay);
     const [count, setCount] = useState(1);
 
-    const handleOption = (e: any) => {
+    const handleOption = (e: React.ChangeEvent<HTMLInputElement>) => {
         setOption(e.target.value);
     }
 
-    const handleDate = (e: any) => {
+    const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setRentDay(e.target.value);
     }
 
-    const handleCount = (e: any) => {
+    const handleCount = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCount(parseInt(e.target.value));
     }
 
@@ -106,7 +106,19 @@ export const MovieCard = ({ item }: any) => {
             count,
             rentDate
         }
-        const finalItems: IMovieAdd[] = [...movies, obj];
+        let index;
+        if (obj.option === 'buy') {
+            index = movies.findIndex((e: IMovieAdd) => e.id === obj.id && e.option === obj.option);
+        } else {
+            index = movies.findIndex((e: IMovieAdd) => e.id === obj.id && e.option === obj.option && e.rentDate === obj.rentDate);
+        }
+        let finalItems: IMovieAdd[] = []
+        if (index !== -1) {
+            finalItems = [...movies];
+            finalItems[index].count = finalItems[index].count + obj.count;
+        } else {
+            finalItems = [...movies, obj];
+        }
         localStorage.setItem('movies', JSON.stringify(finalItems));
         setMovies(finalItems);
     }
