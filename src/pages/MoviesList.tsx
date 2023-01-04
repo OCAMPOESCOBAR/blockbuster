@@ -14,7 +14,7 @@ import { MainContentComponent } from "../utils/styledComponents";
 const BodyContentComponent = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 50px;
     text-align: center;
     justify-content: center;
 `
@@ -33,10 +33,9 @@ const LottieComponent = styled.div`
 
 const ListContent = styled.div`
     margin: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1400px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
 `
 
 
@@ -94,7 +93,7 @@ export const MovieList = () => {
                         return (
                             <LottieComponent>
                                 <Lottie animationData={banner} style={style} />
-                                <h2>find your movie... let's go!</h2>
+                                <h2>Find your movie... Let's go!</h2>
                             </LottieComponent>
                         )
                     if (moviesList.length > 0)

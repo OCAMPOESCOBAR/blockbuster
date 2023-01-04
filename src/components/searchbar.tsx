@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-around;
+    margin-bottom: 50px;
 
     .search-bar {
         position: absolute;
@@ -32,7 +33,7 @@ const Wrapper = styled.div`
       }
       
       .search-bar button {
-        margin-left: auto;
+        padding-left: 15px !important;
         background: none;
         border: none;
         color: white;
@@ -60,8 +61,8 @@ export const SearchBar = ({searchClick, search, setSearch}: any) => {
     return (
         <Wrapper>
             <div className="search-bar">
-                <input type="search" onKeyDown={keyDownHandler} onChange={onChange} value={search} placeholder="enter your search terms here" />
-                <button onClick={searchClick}>go!</button>
+                <input type="search" onKeyDown={keyDownHandler} onChange={onChange} value={search} placeholder="Enter your search terms here" />
+                <button onClick={searchClick}>Go!</button>
             </div>
         </Wrapper>
     )
