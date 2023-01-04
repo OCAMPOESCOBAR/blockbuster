@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useMovieContext } from "../context/MovieContext";
 import { IMovieAdd } from "../models/Movies.interface";
 import noImg from "../assets/img/noimg.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const ContentCard = styled.div`
     display: flex;
@@ -80,6 +82,7 @@ export const MovieCard = ({ item }: any) => {
 
     const currentDay = moment().format('YYYY-MM-DD');
     const [option, setOption] = useState('');
+    const [add, setAdd] = useState(false);
     const [rentDate, setRentDay] = useState(currentDay);
     const [count, setCount] = useState(1);
 
@@ -121,6 +124,7 @@ export const MovieCard = ({ item }: any) => {
         }
         localStorage.setItem('movies', JSON.stringify(finalItems));
         setMovies(finalItems);
+        setAdd(true);
     }
 
     return (
@@ -149,7 +153,10 @@ export const MovieCard = ({ item }: any) => {
                     </div>
                 </div>
                 {option === 'rent' && <input className="mb-2" type="date" value={rentDate} min={currentDay} onChange={handleDate}></input>}
-                <button disabled={option === ''} onClick={handleAdd}>Add</button>
+                <button disabled={option === ''} onClick={handleAdd}>
+                    <span className="mr-2">Add</span>
+                    {add && <FontAwesomeIcon icon={faCheck} />}
+                </button>
             </ContentCard>
         </div>
     )
