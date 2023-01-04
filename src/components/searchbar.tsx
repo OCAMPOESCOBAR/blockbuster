@@ -46,7 +46,7 @@ const Wrapper = styled.div`
 
 export const SearchBar = ({searchClick, search, setSearch}: any) => {
 
-  const onChange = (e: any) =>{ 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{ 
     e.preventDefault()
       setSearch(e.target.value);
   };
