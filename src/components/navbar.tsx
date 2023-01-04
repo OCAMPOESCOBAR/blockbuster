@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useState, useEffect } from 'react';
 import { useMovieContext } from '../context/MovieContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Lottie from "lottie-react";
 import title from "../assets/lotties/title.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import logo from "../assets/img/Movies.png"
 
 
@@ -16,6 +16,7 @@ export const Navbar = () => {
     };
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const PrettyButton = styled.div`
     display: flex;
@@ -26,18 +27,20 @@ export const Navbar = () => {
     padding: 10px 40px 10px 40px;
     box-shadow: 5px 5px 5px 0px darkgray;
 
-    #car-icon {
+    .icon-click {
         cursor: pointer;
     }
   `;
 
     return (
         <PrettyButton>
-            <div/>
-            <div style={{"display": "flex"}}>
+            <div>
+            {location.pathname === '/buy' && <FontAwesomeIcon className="icon-click" icon={faArrowLeft} onClick={() => navigate('/list')}/>}
+            </div>
+            <div className="icon-click" onClick={() => navigate('/list')}>
                 <Lottie animationData={title} style={style}/>
             </div>
-            <div id="car-icon" onClick={() => navigate('/buy')}>
+            <div className="icon-click" onClick={() => navigate('/buy')}>
             <FontAwesomeIcon icon={faCartShopping} />                
             {`(${total})`}
             </div>

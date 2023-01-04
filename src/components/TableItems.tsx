@@ -153,7 +153,7 @@ export const TableItems = ({ items }: any) => {
                                                         <td>
                                                             <OptionColum>
                                                                 <span>{i.option}</span>
-                                                                {i.rentDate && <span><strong>Date: </strong>{i.rentDate}</span>}
+                                                                {i.option === 'rent' && i.rentDate && <span><strong>Date: </strong>{i.rentDate}</span>}
                                                             </OptionColum>
                                                         </td>
                                                         <td>{i.count}</td>
