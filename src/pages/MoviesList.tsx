@@ -14,7 +14,6 @@ import { MainContentComponent } from "../utils/styledComponents";
 const BodyContentComponent = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
     text-align: center;
     justify-content: center;
 `
@@ -35,13 +34,13 @@ const ListContent = styled.div`
     margin: 20px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    width: 100%;
 `
 
 
 export const MovieList = () => {
     const style = {
-        height: '400px'
+        height: '400px',
+        marginTop: '30px'
     };
 
     const [page, setPage] = useState(1);
@@ -72,6 +71,7 @@ export const MovieList = () => {
 
     const searchClick = () => {
         if (search) {
+            setPage(1);
             getMoviesList(search);
         }
     }
@@ -96,6 +96,12 @@ export const MovieList = () => {
                                 <h2>Find your movie... Let's go!</h2>
                             </LottieComponent>
                         )
+                    if (moviesListStatus.isError)
+                        return (
+                            <LottieComponent>
+                                <Lottie animationData={error} style={style} />
+                                <h2>{moviesListStatus.errorMsg}</h2>
+                            </LottieComponent>)
                     if (moviesList.length > 0)
                         return (
                             <>
@@ -110,15 +116,8 @@ export const MovieList = () => {
                                 </ListContent>
                             </>
                         )
-                    if (moviesListStatus.isError)
-                        return (
-                            <LottieComponent>
-                                <Lottie animationData={error} style={style} />
-                                <h2>{moviesListStatus.errorMsg}</h2>
-                            </LottieComponent>)
-
                 })()}
-                {moviesList.length > 0 &&
+                {!moviesListStatus.isError && moviesList.length > 0 &&
                     <div className="pagination">
                         <Pagination
                             className="pagination-data"

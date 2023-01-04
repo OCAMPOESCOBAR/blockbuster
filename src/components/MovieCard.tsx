@@ -128,7 +128,7 @@ export const MovieCard = ({ item }: any) => {
     }
 
     return (
-        <div>
+        <div className="center-card">
             <ContentCard>
                 <div className="text-center">
                     <img src={imgSrc} width={200} height={300}/>

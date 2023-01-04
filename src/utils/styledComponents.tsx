@@ -10,6 +10,7 @@ margin-top: 50px;
     display: flex;
     justify-content: center;
     padding: 10px;
+    margin-bottom: 20px
 }
 
 .pagination-data{
@@ -143,5 +144,10 @@ margin-top: 50px;
   .rc-pagination-next button:after {
     content: "››";
     display: block;
+  }
+
+  .center-card {
+    display: flex;
+    justify-content: center;
   }
 `
