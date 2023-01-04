@@ -12,7 +12,6 @@ import { MovieCard } from "../components/MovieCard";
 import { MainContentComponent } from "../utils/styledComponents";
 
 const BodyContentComponent = styled.div`
-    height: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 20px;

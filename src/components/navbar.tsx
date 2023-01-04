@@ -27,7 +27,9 @@ const PrettyButton = styled.div`
 
 
 export const Navbar = () => {
+    const location = useLocation();
     const {total}: any = useMovieContext();
+
     const style = {
         width: '200px'
     };

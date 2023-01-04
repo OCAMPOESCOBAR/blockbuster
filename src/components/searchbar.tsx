@@ -51,10 +51,16 @@ export const SearchBar = ({searchClick, search, setSearch}: any) => {
       setSearch(e.target.value);
   };
 
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      searchClick();
+    }
+  };
+
     return (
         <Wrapper>
             <div className="search-bar">
-                <input type="search" onChange={onChange} value={search} placeholder="enter your search terms here" />
+                <input type="search" onKeyDown={keyDownHandler} onChange={onChange} value={search} placeholder="enter your search terms here" />
                 <button onClick={searchClick}>go!</button>
             </div>
         </Wrapper>
