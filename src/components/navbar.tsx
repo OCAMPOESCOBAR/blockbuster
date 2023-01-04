@@ -32,7 +32,6 @@ export const Navbar = () => {
             <div/>
             <div style={{"display": "flex"}}>
                 <Lottie animationData={title} style={style}/>
-                {/* <Lottie animationData={car} style={style}/> */}
             </div>
             <div onClick={() => navigate('/buy')}>
             <FontAwesomeIcon icon={faCartShopping} />                

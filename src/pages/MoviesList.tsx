@@ -70,8 +70,6 @@ export const MovieList = () => {
         <div style={{ "height": "90%" }}>
             <SearchBar searchClick={searchClick} setSearch={setSearch} search={search} />
             <div style={{ "marginTop": "20px", "textAlign": "center" }}>
-                {/* <input placeholder="Search" type="search" onChange={handleSearch} /> */}
-                {/* <button onClick={searchClick}>Search</button> */}
                 {(() => {
                     if (moviesListStatus.isLoading)
                         return <Spinner />

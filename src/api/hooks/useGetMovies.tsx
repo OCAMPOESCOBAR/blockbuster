@@ -74,7 +74,7 @@ export const useGetMovies = (apiKey: string, page: number) => {
                     }
                 } catch (e: any) {
                     console.log(e)
-                    dispatch({type: 'FAILURE', payload: e.response.data.Error});
+                    dispatch({type: 'FAILURE', payload: e.response.data.Error || 'Something went wrong!'});
                 }
             })()
     }, [state.__forceRefresh, page]);
