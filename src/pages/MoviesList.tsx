@@ -67,9 +67,9 @@ export const MovieList = () => {
 
 
     return (
-        <div style={{ "height": "90%" }}>
+        <div className="display-flex" style={{ "marginTop": "50px" }}>
             <SearchBar searchClick={searchClick} setSearch={setSearch} search={search} />
-            <div style={{ "marginTop": "20px", "textAlign": "center" }}>
+            <div className="display-flex" style={{ "marginTop": "20px", "textAlign": "center" }}>
                 {/* <input placeholder="Search" type="search" onChange={handleSearch} /> */}
                 {/* <button onClick={searchClick}>Search</button> */}
                 {(() => {
@@ -77,7 +77,7 @@ export const MovieList = () => {
                         return <Spinner />
                     if (isShowBanner)
                         return (
-                        <div style={{ "width": "100%", "height": "90vh", "textAlign": "center", "justifyContent": "center", "display": "flex", "alignItems": "center", "flexDirection": "column" }}>
+                        <div className="display-flex" style={{ "textAlign": "center", "justifyContent": "center", "alignItems": "center" }}>
                             <Lottie animationData={banner} style={style} />
                             <h2 style={{"fontWeight": 700}}>find your movie... let's go!</h2>
                         </div>)
@@ -97,7 +97,8 @@ export const MovieList = () => {
                         )
                     if (moviesListStatus.isError)
                         return (
-                            <div style={{ "width": "100%", "height": "90vh", "textAlign": "center", "justifyContent": "center", "display": "flex", "alignItems": "center", "flexDirection": "column" }}>                            <Lottie animationData={error} style={style} />
+                            <div className="display-flex" style={{ "textAlign": "center", "justifyContent": "center", "alignItems": "center" }}> 
+                                <Lottie animationData={error} style={style} />
                                 <h2 style={{"fontWeight": 700}}>{moviesListStatus.errorMsg}</h2>
                             </div>)
 

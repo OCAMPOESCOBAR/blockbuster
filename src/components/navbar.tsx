@@ -23,8 +23,12 @@ export const Navbar = () => {
     justify-content: space-between;
     align-items: center;
     background-color: #c7d1db;
-    padding: 10px;
+    padding: 10px 40px 10px 40px;
     box-shadow: 5px 5px 5px 0px darkgray;
+
+    #car-icon {
+        cursor: pointer;
+    }
   `;
 
     return (
@@ -34,7 +38,7 @@ export const Navbar = () => {
                 <Lottie animationData={title} style={style}/>
                 {/* <Lottie animationData={car} style={style}/> */}
             </div>
-            <div onClick={() => navigate('/buy')}>
+            <div id="car-icon" onClick={() => navigate('/buy')}>
             <FontAwesomeIcon icon={faCartShopping} />                
             {`(${total})`}
             </div>

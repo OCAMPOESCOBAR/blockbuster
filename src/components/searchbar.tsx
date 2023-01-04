@@ -2,12 +2,13 @@ import { useCallback } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+
     .search-bar {
         position: absolute;
-        top: 20%;
-        left: 50%;
         display: flex;
-        transform: translate(-50%,-50%);
         background: #2770A4;
         width: 500px;
         height: 40px;
